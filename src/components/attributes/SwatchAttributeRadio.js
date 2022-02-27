@@ -35,7 +35,6 @@ class SwatchAttributeRadio extends Component {
           selected={isSelected === this.props.value}
           onChange={this.handleOnChange}
           disabled={canDisable}
-          // checked={canDisable}
           onClick={() => {
             isPDP &&
               this.props.dispatch(

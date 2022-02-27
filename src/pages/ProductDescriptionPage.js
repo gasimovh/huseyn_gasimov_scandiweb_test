@@ -93,8 +93,8 @@ class ProductDescriptionPage extends Component {
                 );
                 setTimeout(() => this.handleRouterClick(), 2000);
               } else {
-                if (selectedAttributes.length === 0) {
-                  toast.warn("Please select an attribute 👆", {
+                if (selectedAttributes.length !== product?.attributes.length) {
+                  toast.warn("Please select all attributes 👆", {
                     autoClose: 3000,
                     position: "bottom-right"
                   });
