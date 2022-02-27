@@ -1,0 +1,23 @@
+.not-found-page {
+  margin: 4rem 10vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .four-o-four {
+    font-size: 45px;
+    margin-bottom: 20px;
+  }
+  .text {
+    font-size: 22px;
+    margin-bottom: 40px;
+  }
+
+  .buttons {
+    display: flex;
+    button {
+      margin-right: 10px;
+    }
+  }
+}

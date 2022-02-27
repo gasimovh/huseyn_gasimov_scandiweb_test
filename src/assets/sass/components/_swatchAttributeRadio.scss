@@ -1,0 +1,65 @@
+.swatch-attribute-component-cartOverlay {
+  margin-right: 8px;
+}
+.swatch-attribute-component-cartPage {
+  margin-right: 12px;
+}
+.swatch-attribute-component-PDP {
+  margin-right: 12px;
+}
+
+@mixin swatch-attribute($width, $height, $lineHeight) {
+  display: none;
+
+  + label {
+    span {
+      display: inline-block;
+      box-sizing: border-box;
+      width: $width; //+
+      height: $height; //+
+      line-height: $lineHeight; //+
+      text-align: center;
+      cursor: pointer;
+      border: 1px solid $black;
+      img {
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
+    }
+
+    .swatch-select {
+      img {
+        opacity: 1;
+      }
+    }
+
+    .swatch-disabled {
+      opacity: 0.3;
+      pointer-events: none;
+      cursor: default;
+    }
+  }
+
+  &:checked + label span img {
+    opacity: 1;
+  }
+}
+
+.swatch-attribute-cartOverlay {
+  @include swatch-attribute(24px, 24px, 24px);
+  + label {
+    span {
+      img {
+        width: 12px;
+        height: 12px;
+      }
+    }
+  }
+}
+
+.swatch-attribute-cartPage {
+  @include swatch-attribute(63px, 45px, 45px);
+}
+.swatch-attribute-PDP {
+  @include swatch-attribute(63px, 45px, 45px);
+}

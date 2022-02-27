@@ -1,0 +1,55 @@
+.text-attribute-component-cartOverlay {
+  margin-right: 8px;
+}
+.text-attribute-component-cartPage {
+  margin-right: 12px;
+}
+.text-attribute-component-PDP {
+  margin-right: 12px;
+}
+
+@mixin text-attribute($width, $height, $lineHeight, $fontSize) {
+  display: none;
+
+  + label {
+    font-family: $sourceSansPro;
+    font-size: $fontSize;
+    display: inline-block;
+    box-sizing: border-box;
+    width: $width;
+    height: $height;
+    line-height: $lineHeight;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid $black;
+    transition: all 0.3s ease;
+  }
+
+  &:checked + label {
+    background-color: $black;
+    color: white;
+  }
+}
+
+.text-disabled {
+  opacity: 0.3;
+  background-color: $grey;
+  pointer-events: none;
+  cursor: default;
+}
+
+.text-select {
+  background-color: $black;
+  color: white;
+}
+
+.text-attribute-cartPage {
+  @include text-attribute(63px, 45px, 45px, 16px);
+}
+.text-attribute-PDP {
+  @include text-attribute(63px, 45px, 45px, 16px);
+}
+
+.text-attribute-cartOverlay {
+  @include text-attribute(42px, 32px, 29px, 14px);
+}

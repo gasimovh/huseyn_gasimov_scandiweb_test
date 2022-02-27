@@ -1,0 +1,88 @@
+.btn {
+  display: block;
+  font-family: $raleway;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 0;
+  border: 0;
+  outline: none;
+  background: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.btn-primary {
+  background-color: $primary;
+  color: white;
+}
+
+.btn-outline-secondary {
+  border: 1px solid $black;
+  background-color: transparent;
+  color: $black;
+}
+
+//cart increase & decrease btns
+@mixin btn-qty($width, $height, $widthPseudo, $heightPseudo) {
+  cursor: pointer;
+  border: 1px solid $black;
+  width: $width;
+  height: $height;
+  position: relative;
+
+  &:after,
+  &:before {
+    content: "";
+    position: absolute;
+    display: block;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: $black;
+  }
+
+  &:after {
+    height: $heightPseudo;
+    width: $widthPseudo;
+  }
+}
+
+//cartpage
+.btn-increase-cartPage {
+  @include btn-qty(45px, 45px, 15px, 1px);
+
+  &:before {
+    height: 15px;
+    width: 1px;
+  }
+}
+
+.btn-decrease-cartPage {
+  @include btn-qty(45px, 45px, 15px, 1px);
+}
+
+//cartoverlay
+.btn-increase-cartOverlay {
+  @include btn-qty(28px, 28px, 8px, 1px);
+
+  &:before {
+    height: 8px;
+    width: 1px;
+  }
+}
+
+.btn-decrease-cartOverlay {
+  @include btn-qty(28px, 28px, 8px, 1px);
+}
+
+//sizes
+.btn-sm {
+  padding: 13px;
+  font-size: 14px;
+}
+
+.btn-lg {
+  font-size: 16px;
+  padding: 16px;
+}

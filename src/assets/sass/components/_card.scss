@@ -1,0 +1,100 @@
+.link-disabled {
+  pointer-events: none;
+  cursor: default;
+}
+.card {
+  display: block;
+  position: relative;
+  height: 100%;
+  transition: 0.3s ease-in-out;
+
+  &-disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .out-of-stock {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    font-size: 24px;
+  }
+
+  &-img-cont {
+    margin: 16px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 330px;
+      object-fit: contain;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    img:hover {
+      transform: scale3d(110%, 110%, 110%);
+    }
+  }
+
+  //button
+  .add-to-cart-btn {
+    cursor: pointer;
+    display: none;
+    background-color: $primary;
+    border: 0;
+    border-radius: 50px;
+    width: 52px;
+    height: 52px;
+    position: absolute;
+    top: 70%;
+    left: 75%;
+
+    .empty-cart-icon {
+      width: 24px;
+      height: 24px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      position: absolute;
+    }
+    #empty-cart-color-path {
+      fill: white;
+    }
+  }
+
+  &-content {
+    margin: 16px;
+    line-height: 180%;
+
+    &-title {
+      font-size: 18px;
+      font-weight: 300;
+    }
+
+    &-price {
+      font-size: 18px;
+      font-weight: 500;
+    }
+  }
+}
+
+.card:hover {
+  box-shadow: $base-box-shadow;
+  transform: scale3d(101%, 101%, 101%);
+  .add-to-cart-btn {
+    display: block;
+    box-shadow: $base-box-shadow;
+    animation: add-to-cart-btn-animation 0.3s ease-in-out;
+    transform-origin: center;
+  }
+}
+
+@keyframes add-to-cart-btn-animation {
+  0% {
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
