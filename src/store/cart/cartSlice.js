@@ -1,5 +1,6 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
+import { sortString } from "../../utils/helperFunctions";
 
 const cartSlice = createSlice({
   name: "cart",
@@ -29,7 +30,9 @@ const cartSlice = createSlice({
       }
 
       //exludes duplicate items
-      const index = state.items.findIndex((item) => item.cartItemId === uid);
+      const index = state.items.findIndex(
+        (item) => sortString(item.cartItemId) === sortString(uid)
+      );
       if (index >= 0) {
         state.items[index].quantity += 1;
       } else {

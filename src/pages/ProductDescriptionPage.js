@@ -70,9 +70,7 @@ class ProductDescriptionPage extends Component {
     const { selectedAttributes, featuredImage, selectedCurrency } = this.props;
     const isDescriptionLong = product?.description.length > 300;
     const { show } = this.state;
-    console.log(this.state.show);
 
-    console.log(this.props.featuredImage);
     return (
       <div className="product-description-page">
         <div className="all-images">{this.showImages(product)}</div>

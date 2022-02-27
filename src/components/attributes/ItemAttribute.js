@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { generateKey } from "../../utils/helperFunctions";
 import SwatchAttributeRadio from "./SwatchAttributeRadio";
 import TextAttributeRadio from "./TextAttributeRadio";
 
@@ -13,7 +14,7 @@ class ItemAttribute extends Component {
           selectedAttributePurchase={selectedAttributePurchase}
           customStyle={customStyle}
           product={product}
-          id={item.value + attribute.name + new Date().getTime()}
+          id={item.value + generateKey()}
           value={item.value}
           name={attribute.name}
           key={item.value}
@@ -23,7 +24,7 @@ class ItemAttribute extends Component {
           selectedAttributePurchase={selectedAttributePurchase}
           customStyle={customStyle}
           product={product}
-          id={item.value + attribute.name + new Date().getTime()}
+          id={item.value + generateKey()}
           value={item.value}
           name={attribute.name}
           key={item.value}
