@@ -62,6 +62,45 @@ class ProductDescriptionPage extends Component {
       );
     });
   }
+
+  addProductToCart(product, selectedAttributes) {
+    return (
+      <button
+        onClick={() => {
+          if (product?.inStock) {
+            if (product?.attributes.length === 0) {
+              this.props.dispatch(
+                addToCart({
+                  product
+                })
+              );
+            } else {
+              if (selectedAttributes.length !== product?.attributes.length) {
+                toast.warn("Please select all attributes 👆", {
+                  autoClose: 3000,
+                  position: "bottom-right"
+                });
+              } else {
+                this.props.dispatch(
+                  addToCart({
+                    product
+                  })
+                );
+              }
+            }
+          } else {
+            toast.info("This product is out of stock.", {
+              autoClose: 3000,
+              position: "bottom-right"
+            });
+          }
+        }}
+        className="btn btn-primary btn-lg"
+      >
+        Add to cart
+      </button>
+    );
+  }
   render() {
     const { product } = this.props.data;
     const { selectedAttributes, featuredImage, selectedCurrency } = this.props;
@@ -80,34 +119,7 @@ class ProductDescriptionPage extends Component {
           <div className="attributes">{this.showAttributes(product)}</div>
           <p className="price">Price:</p>
           {this.showPrice(product, selectedCurrency)}
-          <button
-            onClick={() => {
-              if (product?.attributes.length === 0) {
-                this.props.dispatch(
-                  addToCart({
-                    product
-                  })
-                );
-              } else {
-                if (selectedAttributes.length !== product?.attributes.length) {
-                  toast.warn("Please select all attributes 👆", {
-                    autoClose: 3000,
-                    position: "bottom-right"
-                  });
-                } else {
-                  this.props.dispatch(
-                    addToCart({
-                      product
-                    })
-                  );
-                }
-              }
-            }}
-            className="btn btn-primary btn-lg"
-          >
-            Add to cart
-          </button>
-
+          {this.addProductToCart(product, selectedAttributes)}
           {isDescriptionLong ? (
             <button
               onClick={this.toggleShow}

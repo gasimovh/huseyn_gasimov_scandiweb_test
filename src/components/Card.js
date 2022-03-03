@@ -22,15 +22,12 @@ class Card extends Component {
             : `card card-disabled`
         }
       >
-        <Link
-          className={product.inStock ? `` : `link-disabled`}
-          to={`/products/${product.id}`}
-        >
+        <Link to={`/products/${product.id}`}>
           <div className="card-img-cont">
             {product.inStock || (
               <div className="out-of-stock">Out of Stock</div>
             )}
-            <img src={product.gallery[0]}></img>
+            <img src={product.gallery[0]} alt={`${product.name}`}></img>
           </div>
         </Link>
         <button
