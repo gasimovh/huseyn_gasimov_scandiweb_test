@@ -66,6 +66,7 @@ class CurrencySwitcher extends Component {
                 showCurrencyList ? "arrow-icon arrow-icon-active" : "arrow-icon"
               }
               src={arrow}
+              alt="arrow icon"
             />
           </span>
           <div

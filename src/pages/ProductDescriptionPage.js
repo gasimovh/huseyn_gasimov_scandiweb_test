@@ -6,7 +6,6 @@ import { compose } from "@reduxjs/toolkit";
 import { connect } from "react-redux";
 import { addToCart } from "../store/cart/cartSlice";
 import { toast } from "react-toastify";
-import { withRouter } from "react-router-dom";
 import { setFeaturedImage } from "../store/product/productSlice";
 import { roundTo2Decimal } from "../utils/helperFunctions";
 import DescriptionModal from "../components/DescriptionModal";
@@ -25,9 +24,6 @@ class ProductDescriptionPage extends Component {
     });
   };
 
-  handleRouterClick = () => {
-    this.props.history.push("/cart");
-  };
   showPrice(product, selectedCurrency) {
     return product?.prices.map((price) => {
       //Filter out the amount according to the selected currency
@@ -48,6 +44,7 @@ class ProductDescriptionPage extends Component {
           onClick={() => this.props.dispatch(setFeaturedImage(img))}
           src={img}
           key={img}
+          alt="featured"
         />
       );
     });
@@ -75,7 +72,7 @@ class ProductDescriptionPage extends Component {
       <div className="product-description-page">
         <div className="all-images">{this.showImages(product)}</div>
         <div className="featured-image">
-          <img src={featuredImage} />
+          <img src={featuredImage} alt="featured" />
         </div>
         <div className="right-description">
           <p className="brand">{product?.brand}</p>
@@ -91,7 +88,6 @@ class ProductDescriptionPage extends Component {
                     product
                   })
                 );
-                setTimeout(() => this.handleRouterClick(), 2000);
               } else {
                 if (selectedAttributes.length !== product?.attributes.length) {
                   toast.warn("Please select all attributes 👆", {
@@ -104,10 +100,8 @@ class ProductDescriptionPage extends Component {
                       product
                     })
                   );
-                  setTimeout(() => this.handleRouterClick(), 2000);
                 }
               }
-              //
             }}
             className="btn btn-primary btn-lg"
           >
@@ -167,8 +161,4 @@ const gqlWrapper = graphql(GET_PRODUCT_BY_ID, {
   }
 });
 
-export default compose(
-  withRouter,
-  reduxWrapper,
-  gqlWrapper
-)(ProductDescriptionPage);
+export default compose(reduxWrapper, gqlWrapper)(ProductDescriptionPage);
