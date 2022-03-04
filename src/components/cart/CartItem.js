@@ -5,6 +5,7 @@ import { GET_PRODUCT_BY_ID } from "../../queries/queries";
 import { compose } from "@reduxjs/toolkit";
 import { connect } from "react-redux";
 import { increaseQty, decreaseQty } from "../../store/cart/cartSlice";
+import { generateKey, roundTo2Decimal } from "../../utils/helperFunctions";
 
 class CartItem extends Component {
   constructor(props) {
@@ -28,14 +29,14 @@ class CartItem extends Component {
   showPrice(product, selectedCurrency) {
     return product?.prices.map((price) => {
       //Filter out the amount according to the selected currency
-      if (price.currency.label === selectedCurrency.label) {
-        return (
-          <div className="card-content-price" key={product?.id}>
+      return (
+        price.currency.label === selectedCurrency.label && (
+          <div className="card-content-price" key={generateKey()}>
             {selectedCurrency.symbol}
-            {(Math.round(price.amount * 100) / 100).toFixed(2)}
+            {roundTo2Decimal(price.amount)}
           </div>
-        );
-      }
+        )
+      );
     });
   }
   showAttributes(product) {
@@ -103,7 +104,7 @@ class CartItem extends Component {
             )}
             <div className={`cart-item-right-side-img-${customStyle}`}>
               <span className="helper"></span>
-              <img src={product?.gallery[imgIndex]} />
+              <img src={product?.gallery[imgIndex]} alt={product?.name} />
             </div>
           </div>
         </div>

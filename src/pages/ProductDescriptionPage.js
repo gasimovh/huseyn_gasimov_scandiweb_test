@@ -7,8 +7,9 @@ import { connect } from "react-redux";
 import { addToCart } from "../store/cart/cartSlice";
 import { toast } from "react-toastify";
 import { setFeaturedImage } from "../store/product/productSlice";
-import { roundTo2Decimal } from "../utils/helperFunctions";
+import { generateKey, roundTo2Decimal } from "../utils/helperFunctions";
 import DescriptionModal from "../components/DescriptionModal";
+import dompurify from "dompurify";
 
 class ProductDescriptionPage extends Component {
   constructor(props) {
@@ -29,7 +30,7 @@ class ProductDescriptionPage extends Component {
       //Filter out the amount according to the selected currency
       return (
         price.currency.label === selectedCurrency.label && (
-          <div className="price-value" key={price + new Date().getTime()}>
+          <div className="price-value" key={generateKey()}>
             {selectedCurrency.symbol}
             {roundTo2Decimal(price.amount)}
           </div>
@@ -44,7 +45,7 @@ class ProductDescriptionPage extends Component {
           onClick={() => this.props.dispatch(setFeaturedImage(img))}
           src={img}
           key={img}
-          alt="featured"
+          alt={product?.name}
         />
       );
     });
@@ -111,7 +112,7 @@ class ProductDescriptionPage extends Component {
       <div className="product-description-page">
         <div className="all-images">{this.showImages(product)}</div>
         <div className="featured-image">
-          <img src={featuredImage} alt="featured" />
+          <img src={featuredImage} alt={product?.name} />
         </div>
         <div className="right-description">
           <p className="brand">{product?.brand}</p>
@@ -131,7 +132,7 @@ class ProductDescriptionPage extends Component {
             <div
               className="description"
               dangerouslySetInnerHTML={{
-                __html: product?.description
+                __html: dompurify.sanitize(product?.description)
               }}
             />
           )}

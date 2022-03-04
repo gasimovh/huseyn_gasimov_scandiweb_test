@@ -5,9 +5,22 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { addToCart } from "../store/cart/cartSlice";
 import { setFeaturedImage } from "../store/product/productSlice";
-import { roundTo2Decimal } from "../utils/helperFunctions";
+import { generateKey, roundTo2Decimal } from "../utils/helperFunctions";
 
 class Card extends Component {
+  showPrices(product, selectedCurrency) {
+    return product.prices.map((price) => {
+      //Filter out the amount according to the selected currency
+      return (
+        price.currency.label === selectedCurrency.label && (
+          <div className="card-content-price" key={generateKey()}>
+            {selectedCurrency.symbol}
+            {roundTo2Decimal(price.amount)}
+          </div>
+        )
+      );
+    });
+  }
   render() {
     const { product, selectedCurrency } = this.props;
     return (
@@ -15,12 +28,7 @@ class Card extends Component {
         onClick={() =>
           this.props.dispatch(setFeaturedImage(product.gallery[0]))
         }
-        className={
-          product.inStock
-            ? // true
-              `card`
-            : `card card-disabled`
-        }
+        className={product.inStock ? `card` : `card card-disabled`}
       >
         <Link to={`/products/${product.id}`}>
           <div className="card-img-cont">
@@ -47,17 +55,7 @@ class Card extends Component {
           <div className="card-content-title">
             {product.brand} {product.name}
           </div>
-          {product.prices.map((price) => {
-            //Filter out the amount according to the selected currency
-            if (price.currency.label === selectedCurrency.label) {
-              return (
-                <div className="card-content-price" key={product.id}>
-                  {selectedCurrency.symbol}
-                  {roundTo2Decimal(price.amount)}
-                </div>
-              );
-            }
-          })}
+          {this.showPrices(product, selectedCurrency)}
         </div>
       </div>
     );

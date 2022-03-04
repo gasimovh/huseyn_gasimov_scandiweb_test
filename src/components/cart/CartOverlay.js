@@ -21,8 +21,8 @@ class CartOverlay extends Component {
 
   showTotalPrice(items, selectedCurrency) {
     let totalPrice = 0;
-    items.map((item) => {
-      item.prices.map((price) => {
+    items.forEach((item) => {
+      item.prices.forEach((price) => {
         //Filter out the amount according to the selected currency
         if (price.currency.label === selectedCurrency.label) {
           totalPrice += roundTo2Decimal(price.amount) * item.quantity;
