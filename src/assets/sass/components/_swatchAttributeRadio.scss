@@ -41,6 +41,7 @@
   }
 
   &:checked + label span img {
+    mix-blend-mode: difference;
     opacity: 1;
   }
 }
@@ -50,6 +51,7 @@
   + label {
     span {
       img {
+        mix-blend-mode: difference;
         width: 12px;
         height: 12px;
       }
