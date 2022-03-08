@@ -8,35 +8,6 @@ import { connect } from "react-redux";
 import { selectCurrency } from "../../store/currency/currencySlice";
 
 class CurrencySwitcher extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showCurrencyList: false
-    };
-  }
-
-  toggleCurrencyList = (event) => {
-    this.setState({
-      showCurrencyList: !this.state.showCurrencyList
-    });
-  };
-
-  myRef = React.createRef();
-
-  componentDidMount() {
-    document.addEventListener("mousedown", this.handleClickOutside);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener("mousedown", this.handleClickOutside);
-  }
-
-  handleClickOutside = (e) => {
-    if (!this.myRef.current.contains(e.target)) {
-      this.setState({ showCurrencyList: false });
-    }
-  };
-
   showCurrencies(currencies) {
     return currencies?.map((currency) => {
       return (
@@ -55,10 +26,13 @@ class CurrencySwitcher extends Component {
 
   render() {
     const { currencies } = this.props.data;
-    const { showCurrencyList } = this.state;
+    const { showCurrencyList } = this.props;
     return (
-      <div onClick={this.toggleCurrencyList} className="currency-switcher">
-        <div className="selected-currency">
+      <div className="currency-switcher">
+        <div
+          onClick={() => this.props.toggleShowCurrencyList()}
+          className="selected-currency"
+        >
           {this.props.selectedCurrency.symbol}
           <span>
             <img

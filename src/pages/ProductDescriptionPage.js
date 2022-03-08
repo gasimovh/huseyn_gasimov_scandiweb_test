@@ -10,6 +10,7 @@ import { setFeaturedImage } from "../store/product/productSlice";
 import { generateKey, roundTo2Decimal } from "../utils/helperFunctions";
 import DescriptionModal from "../components/DescriptionModal";
 import dompurify from "dompurify";
+import parse from "html-react-parser";
 
 class ProductDescriptionPage extends Component {
   constructor(props) {
@@ -129,12 +130,9 @@ class ProductDescriptionPage extends Component {
               Read description
             </button>
           ) : (
-            <div
-              className="description"
-              dangerouslySetInnerHTML={{
-                __html: dompurify.sanitize(product?.description)
-              }}
-            />
+            <div className="description">
+              {parse(dompurify.sanitize(product?.description))}
+            </div>
           )}
           {show && (
             <div

@@ -11,7 +11,8 @@ class NavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      show: false
+      show: false,
+      showCurrencyList: false
     };
   }
 
@@ -21,9 +22,16 @@ class NavBar extends Component {
     });
   };
 
+  toggleShowCurrencyList = (event) => {
+    this.setState({
+      showCurrencyList: !this.state.showCurrencyList
+    });
+  };
+
   render() {
-    const { show } = this.state;
+    const { show, showCurrencyList } = this.state;
     const badgeCounter = this.props.items.length;
+    console.log(showCurrencyList, show);
     return (
       <nav className="nav-bar">
         <FilterCategory />
@@ -31,7 +39,16 @@ class NavBar extends Component {
           <img src={logo} alt="logo" className="logo" />
         </Link>
         <div className="action-bar">
-          <CurrencySwitcher />
+          {showCurrencyList && (
+            <div
+              onClick={this.toggleShowCurrencyList}
+              className="show-currency-list"
+            ></div>
+          )}
+          <CurrencySwitcher
+            showCurrencyList={showCurrencyList}
+            toggleShowCurrencyList={this.toggleShowCurrencyList}
+          />
           <div className="cart-icon-container">
             {badgeCounter > 0 && (
               <span onClick={this.toggleShow} className="badge">

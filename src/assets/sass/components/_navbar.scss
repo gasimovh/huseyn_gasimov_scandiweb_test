@@ -148,6 +148,17 @@
   }
 }
 
+.show-currency-list {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 4.4rem;
+  left: -1.3rem;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+}
+
 @keyframes dropDownAnimation {
   0% {
     transform: scaleY(0);

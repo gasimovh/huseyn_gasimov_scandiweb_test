@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import dompurify from "dompurify";
+import parse from "html-react-parser";
 
 export default class DescriptionModal extends Component {
   render() {
@@ -7,12 +8,9 @@ export default class DescriptionModal extends Component {
     const { productDescription } = this.props;
     return (
       <div className="description-modal">
-        <div
-          className="description"
-          dangerouslySetInnerHTML={{
-            __html: dompurify.sanitize(productDescription)
-          }}
-        />
+        <div className="description">
+          {parse(dompurify.sanitize(productDescription))}
+        </div>
       </div>
     );
   }

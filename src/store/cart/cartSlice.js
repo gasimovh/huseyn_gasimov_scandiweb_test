@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { sortString } from "../../utils/helperFunctions";
 
@@ -15,7 +15,7 @@ const cartSlice = createSlice({
       //set default attributes and create unique cart item identifier
       let uid = action.payload.product.id;
       if (state.selectedAttributes.length === 0) {
-        action.payload.product.attributes.map((attribute) => {
+        action.payload.product.attributes.forEach((attribute) => {
           state.selectedAttributes.push({
             value: attribute.items[0].value,
             name: attribute.name,
@@ -24,7 +24,7 @@ const cartSlice = createSlice({
           uid += attribute.name + attribute.items[0].value;
         });
       } else {
-        state.selectedAttributes.map((attribute) => {
+        state.selectedAttributes.forEach((attribute) => {
           uid += attribute.name + attribute.value;
         });
       }
