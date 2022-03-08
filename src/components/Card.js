@@ -38,19 +38,21 @@ class Card extends Component {
             <img src={product.gallery[0]} alt={`${product.name}`}></img>
           </div>
         </Link>
-        <button
-          //addToCart: adding product to store
-          onClick={() =>
-            this.props.dispatch(
-              addToCart({
-                product
-              })
-            )
-          }
-          className="add-to-cart-btn"
-        >
-          <EmptyCart className="empty-cart-icon" />
-        </button>
+        {product.inStock && (
+          <button
+            //addToCart: adding product to store
+            onClick={() =>
+              this.props.dispatch(
+                addToCart({
+                  product
+                })
+              )
+            }
+            className="add-to-cart-btn"
+          >
+            <EmptyCart className="empty-cart-icon" />
+          </button>
+        )}
         <div className="card-content">
           <div className="card-content-title">
             {product.brand} {product.name}
